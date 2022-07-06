@@ -1,3 +1,11 @@
+Adresse des Repository Temporaire
+===
+- [API](https://github.com/domlem/netflix-Groupe-api-2022)
+- [Server](https://github.com/gaetanse/netflix-Groupe-server-2022)
+- [Front](https://github.com/christophedotnet/netflix-Groupe-front-2022)
+
+Ces repository seront regroupés en 1 seul une fois le projet terminé.
+
 Projet Fil Rouge Netflix formation M2i
 ===
 Depot Github Projet fil Rouge Netflix.

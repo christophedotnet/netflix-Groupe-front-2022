@@ -1,10 +1,11 @@
 
-import './signin.css';
+import Navbar from '../navbar/navbar';
+import './login.css';
 
-function Signin() {
+function Login() {
   return (
     <>
-   
+      <Navbar/>
 
         <div className="signin m-auto">
           <form>
@@ -29,4 +30,4 @@ function Signin() {
   );
 }
 
-export default Signin;
+export default Login

@@ -1,0 +1,19 @@
+.hidden {
+   color : transparent;
+   border-color: white;
+text-align: center;
+}
+
+.hidden:hover {
+    color : black;
+    cursor: pointer;
+    transform: scale(1.2);
+
+}
+
+
+.withbutton{
+    width : 1%;
+}
+
+

@@ -1,0 +1,32 @@
+.details {
+    background-color: transparent;
+    text-align: right;
+    height: 300px;
+    overflow: hidden; 
+    display: flex;
+
+  justify-content: center; 
+
+}
+
+
+
+.imagedetail {
+    
+    max-width: 50%;
+ align-self: flex-start; 
+/* border-left : 50px solid yellow; */
+
+
+}
+
+.imagedetail::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    right: 50%; 
+    width: 40%;
+    height: 100%;
+ /*   background: linear-gradient(to right, #F5F5F5, rgba(255,255,255,0)); */
+    background: linear-gradient(to left, white, rgba(255,255,255,0));
+}

@@ -1,4 +1,18 @@
 .faq {
   max-width: 750px;
+  background-color: grey !important;
+  color: white !important;
+}
+.faq1 {
+  max-width: 750px;
+  background-color: black !important;
+  color: white !important;
+}
+.colorWhite{
+  color: white;
+}
+.backgroundBlack{
+  background-color: black;
+  height: 100vh;
 }
 

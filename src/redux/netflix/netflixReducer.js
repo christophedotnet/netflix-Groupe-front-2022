@@ -1,33 +1,20 @@
 const INITIAL_STATE = {
-    listePokemons : [],
-    listePokemonsCaptures: [],
-    show: false
+    user : null,
+    ressources : []
 }
 
 function NetflixReducer (state = INITIAL_STATE, action) {
     switch (action.type) {
-        case 'ADD-POKEMON': {
+        case 'GET-RESSOURCE': {
             return{
                 ...state,
-                listePokemons: [...state.listePokemons, action.payload]
+                ressources: [...state.ressources, action.payload]
             }
         }
-        case 'ADD-POKEMON-CAPTURE': {
+        case 'SET-USER': {
             return{
                 ...state,
                 listePokemonsCaptures: [...state.listePokemonsCaptures, action.payload]
-            }
-        }
-        case 'CLEAR-CAPTURES': {
-            return{
-                ...state,
-                listePokemonsCaptures: action.payload
-            }
-        }
-        case 'INVERSE': {
-            return{
-                ...state,
-                show: !state.show
             }
         }
         default: return state

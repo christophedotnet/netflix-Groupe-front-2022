@@ -36,7 +36,7 @@ function Home() {
                 <DetailSlider/>
             </div>
             : <div>
-                <Navbar id={0}/>
+                <Navbar id={1}/>
                 je suis pas connecter
             </div>
         }

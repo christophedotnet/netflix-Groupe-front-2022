@@ -4,7 +4,7 @@ import Navbar from "./../navbar/navbar"
 function Register() {
     return(
         <>
-            <Navbar id={1}></Navbar>
+            <Navbar id={0}></Navbar>
             <div className="signin m-auto">
             <form>
                 <div className="mb-3 test">

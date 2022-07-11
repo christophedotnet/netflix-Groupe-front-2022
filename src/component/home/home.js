@@ -31,7 +31,7 @@ function Home() {
         {
             user != null ? 
             <div>
-                <Navbar id={2}/>
+                <Navbar id={2} user={user}/>
                 je suis connecter
                 <DetailSlider/>
             </div>

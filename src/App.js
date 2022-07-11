@@ -5,6 +5,7 @@ import Login from "./component/login/login"
 import Register from "./component/register/register"
 import { BrowserRouter, Routes, Route } from "react-router-dom"
 import './App.css';
+import Account from "./component/account/account"
 
 function App() {
   return (
@@ -35,6 +36,7 @@ function App() {
           <Route path="/" element={<Home/>}></Route>
           <Route path="/register" element={<Register/>}></Route>
           <Route path="/login" element={<Login/>}></Route>
+          <Route path="/account" element={<Account/>}></Route>
           <Route path="/admin" element={<Admin/>}></Route>
           <Route path="/faq" element={<Faq/>}></Route>
         </Routes>

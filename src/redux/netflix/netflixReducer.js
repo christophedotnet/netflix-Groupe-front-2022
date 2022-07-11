@@ -1,5 +1,5 @@
 const INITIAL_STATE = {
-    user : null,
+    user : { avatar: "http://alisacruise.com/public/upload/avatars/no_avatar.jpg" },
     faqs: [
         {
             Question:"Question 1",

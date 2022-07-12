@@ -1,4 +1,5 @@
 const INITIAL_STATE = {
+    userAvatar: null,
     user : { avatar: "http://alisacruise.com/public/upload/avatars/no_avatar.jpg" },
     faqs: [
         {
@@ -43,6 +44,12 @@ function NetflixReducer (state = INITIAL_STATE, action) {
             return{
                 ...state,
                 user: action.payload
+            }
+        }
+        case 'SET-USER-AVATAR': {
+            return{
+                ...state,
+                userAvatar: action.payload
             }
         }
         default: return state

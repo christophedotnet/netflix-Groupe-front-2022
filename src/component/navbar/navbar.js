@@ -1,8 +1,10 @@
 import './navbar.css'
 import {BrowserRouter as Router, Link} from 'react-router-dom'
+import { useDispatch, useSelector } from "react-redux"
 
 
 function Navbar(props) {
+  let avatar = useSelector(state=>state.userAvatar)
   return(
     <nav className="navbar navbar-expand-lg ">
       <div className="container-fluid">
@@ -17,7 +19,7 @@ function Navbar(props) {
               props.id === 1 && <Link to="/login"><button className="btn btn-danger" type="submit">Login</button></Link>
             }
             {
-              props.id === 2 && <Link to="/account"><img src={props.user.avatar} width={64} height={64} class="img-thumbnail" alt="..."></img></Link>
+              props.id === 2 && <Link to="/account"><img src={avatar} style={{width:64,height:64}} alt="..."></img></Link>
             }
           </form>
         </div>

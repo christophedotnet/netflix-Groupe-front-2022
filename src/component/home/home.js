@@ -4,27 +4,23 @@ import { useDispatch, useSelector } from "react-redux"
 import DetailSlider from '../detailslide/detailslide'
 import './home.css'
 
-//const dispatch = useDispatch()
 let user = null;
 
 function Home() {
     
     user = useSelector(state=>state.user)
+    
+    const dispatch = useDispatch()
 
-    /*useEffect(() =>{
-        //const listePokemons = useSelector(state=>state.listePokemons)
-        getPokemons().then(res =>{
-            const data = res.data.results
-            data.map(e=>{
-                return(
-                    dispatch({
-                        type: "ADD-POKEMON",
-                        payload: e
-                    })
-                )
+    useEffect(() =>{
+        let userLocal = localStorage.getItem('user')
+        if(userLocal!=null){
+            dispatch({
+                type: "SET-USER",
+                payload: userLocal
             })
-        })
-    }, [])*/
+        }
+    }, [])
 
   return (
     <div>

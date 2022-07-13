@@ -21,20 +21,22 @@ function Account() {
     const [img, setImg] = useState();
 
     useEffect(() =>{
-            localforage.getItem("avatar").then(val => {
+            /*localforage.getItem("avatar").then(val => {
                 dispatch({
                     type: "SET-USER-AVATAR",
                     payload: URL.createObjectURL(val)
                 })
-            });
+            });*/
     }, [])
 
 
     function logout(){
+        localStorage.clear()
         dispatch({
             type: "SET-USER",
             payload: null
         })
+        //redirect to home
     } 
 
     return (
@@ -53,17 +55,27 @@ function Account() {
                 id="inputGroupFile01"
                 label={fileName}
                 onChange={(e) => {
-                    var imageURI = window.URL.createObjectURL(e.target.files[0]);
+                    
+                    axios.get('https://localhost:7119/user/avatar?id='+user.ID+'&avatar='+e.target.files[0]
+                    ,{
+                    headers : {
+                        'Access-Control-Allow-Origin': '*',
+                        'Content-Type': 'application/json',
+                    }
+                    })
+                    /*var imageURI = window.URL.createObjectURL(e.target.files[0]);
                     localforage.setItem("avatar", e.target.files[0]).then(() => {
                         setImg(imageURI);
                         dispatch({
                             type: "SET-USER-AVATAR",
                             payload: imageURI
                         })
-                    });
+                    });*/
                 }}
                 
               />
+
+              <button type='button' onClick={()=>logout()}>deconexion</button>
         </div>
     )
 }

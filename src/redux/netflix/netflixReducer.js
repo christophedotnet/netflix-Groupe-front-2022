@@ -1,28 +1,6 @@
 const INITIAL_STATE = {
     userAvatar: null,
-    user : { avatar: "http://alisacruise.com/public/upload/avatars/no_avatar.jpg" },
-    faqs: [
-        {
-            Question:"Question 1",
-            Response: "Response 1"
-        },
-        {
-            Question:"Question 2",
-            Response: "Response 2"
-        },
-        {
-            Question:"Question 3",
-            Response: "Response 3"
-        },
-        {
-            Question:"Question 4",
-            Response: "Response 4"
-        },
-        {
-            Question:"Question 5",
-            Response: "Response 5"
-        }
-    ],
+    user : null,
     ressources : []
 }
 

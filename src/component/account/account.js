@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux"
 import localforage from "localforage";
 import { v4 as uuid } from 'uuid'
 import imageToBase64 from 'image-to-base64/browser'
+import { useNavigate } from 'react-router-dom';
 //import {encode, decode} from 'node-base64-image';
 const axios = require('axios').default
 
@@ -19,6 +20,8 @@ function Account() {
     const [imageData2, setImageData2] = useState(null);
     const [fileName, setFileName] = useState("Upload Boundary File");
     const [img, setImg] = useState();
+
+    let navigate = useNavigate()
 
     useEffect(() =>{
             /*localforage.getItem("avatar").then(val => {
@@ -36,7 +39,7 @@ function Account() {
             type: "SET-USER",
             payload: null
         })
-        //redirect to home
+        navigate("/")
     } 
 
     return (

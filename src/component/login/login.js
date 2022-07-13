@@ -1,12 +1,13 @@
 
 import Navbar from '../navbar/navbar'
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import './login.css'
 import { useEffect,useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import localforage from "localforage";
 import { v4 as uuid } from 'uuid'
 import imageToBase64 from 'image-to-base64/browser'
+import { useNavigate } from 'react-router-dom'
 //import {encode, decode} from 'node-base64-image';
 const axios = require('axios').default
 
@@ -16,6 +17,8 @@ function Login() {
   const [password, setPassword] = useState(null)
   
   let dispatch = useDispatch()
+  
+  let navigate = useNavigate();
 
   function login(e){
     e.preventDefault()
@@ -33,6 +36,7 @@ function Login() {
           type: "SET-USER",
           payload: response.data
         })
+        navigate("/")
       }
       console.log(response);
     })

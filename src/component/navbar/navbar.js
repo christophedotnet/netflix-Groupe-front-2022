@@ -17,7 +17,7 @@ function Navbar(props) {
               props.id === 1 && <Link to="/login"><button className="btn btn-danger" type="submit">Login</button></Link>
             }
             {
-              props.id === 2 && <Link to="/account"><img src={props.user.avatar != "" && props.user.avatar != null ? "http://localhost:7119/Assets/Avatars/"+props.user.avatar : "/no_avatar.jpg"} style={{width:64,height:64}} alt="..."></img></Link>
+              props.id === 2 && <Link to="/account"><img src={props.user.avatar != "" && props.user.avatar != null ? "http://localhost:7119/Assets/Avatars/"+props.user.avatar : "/no_avatar.jpg"} style={{width:64,height:64,borderRadius: "5px"}} alt="..."></img></Link>
             }
           </form>
         </div>

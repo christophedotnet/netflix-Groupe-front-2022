@@ -1,14 +1,9 @@
-
-import Navbar from '../navbar/navbar'
-import { Link, useLocation } from 'react-router-dom'
 import './login.css'
-import { useEffect,useState } from "react"
-import { useDispatch, useSelector } from "react-redux"
-import localforage from "localforage";
-import { v4 as uuid } from 'uuid'
-import imageToBase64 from 'image-to-base64/browser'
-import { useNavigate } from 'react-router-dom'
-//import {encode, decode} from 'node-base64-image';
+import Navbar from '../navbar/navbar'
+import { Link, useNavigate } from 'react-router-dom'
+import { useState } from "react"
+import { useDispatch } from "react-redux"
+import localforage from "localforage"
 const axios = require('axios').default
 
 function Login() {
@@ -17,28 +12,14 @@ function Login() {
   const [password, setPassword] = useState(null)
   
   let dispatch = useDispatch()
-  
-  let navigate = useNavigate();
+  let navigate = useNavigate()
 
   function login(e){
     e.preventDefault()
-    axios.get('http://localhost:7119/login?mail='+mail+'&password='+password
-    ,{
-      headers : {
-        'Access-Control-Allow-Origin': '*',
-        'Content-Type': 'application/json',
-    }
-    })
+    axios.get('http://localhost:7119/login?mail='+mail+'&password='+password,{
+    headers : {'Access-Control-Allow-Origin': '*', 'Content-Type': 'application/json' }})
     .then(function (response) {
       if(response.data!=null){
-
-        console.log(response.data)
-        /*localStorage.setItem('user', JSON.stringify(response.data))
-        dispatch({
-          type: "SET-USER",
-          payload: response.data
-        })*/
-        
         
         localforage.setItem('user', response.data, function (err) {
           dispatch({
@@ -47,28 +28,9 @@ function Login() {
           })
           navigate("/")
         })
-          // we got our value
 
-        /*localforage.setItem('user', response.data).then(function () {
-          return localforage.getItem('key');
-        }).then(function (value) {
-          // we got our value
-        dispatch({
-          type: "SET-USER",
-          payload: response.data
-        })
-        navigate("/")
-        }).catch(function (err) {
-          // we got an error
-        });
-        console.log(response.data)
-        //navigate("/")
-        */
       }
     })
-    .catch(function (error) {
-      console.log(error);
-    });
   }
 
   return (
@@ -79,11 +41,11 @@ function Login() {
           <h4 class="mb-3">Login</h4>
             <div className="mb-3 test">
               <label className="form-label">Email address</label>
-              <input type="email" className="form-control" id="exampleInputEmail" aria-describedby="emailHelp" onChange={(e)=>setMail(e.target.value)}/>
+              <input type="email" required className="form-control" id="exampleInputEmail" aria-describedby="emailHelp" onChange={(e)=>setMail(e.target.value)}/>
             </div>
             <div className="mb-3">
               <label className="form-label">Password</label>
-              <input type="password" className="form-control" id="exampleInputPassword" onChange={(e)=>setPassword(e.target.value)}/>
+              <input type="password" required className="form-control" id="exampleInputPassword" onChange={(e)=>setPassword(e.target.value)}/>
             </div>
             <div className="mb-3">
               <button type="submit" className="btn btn-danger" onClick={(e)=>{
@@ -96,7 +58,7 @@ function Login() {
           </form>
         </div>
     </>
-  );
+  )
 }
 
 export default Login

@@ -57,8 +57,9 @@ function Account() {
                             }).then((newUser)=>{
                                 if(newUser!=null){
                                     localforage.setItem('user', newUser.data, function (err) {
-                                        window.location.reload(false)
+                                        //window.location.reload(false)
                                     })
+                                    dispatch({ type: "SET-USER", payload: newUser.data })
                                 }
                             })
                         }

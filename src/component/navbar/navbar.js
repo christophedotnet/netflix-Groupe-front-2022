@@ -1,10 +1,8 @@
 import './navbar.css'
-import {BrowserRouter as Router, Link, useHistory} from 'react-router-dom'
-import { useDispatch, useSelector } from "react-redux"
-
+import {BrowserRouter as Router, Link} from 'react-router-dom'
 
 function Navbar(props) {
-  let avatar = useSelector(state=>state.userAvatar)
+
   return(
     <nav className="navbar navbar-expand-lg ">
       <div className="container-fluid">
@@ -19,7 +17,7 @@ function Navbar(props) {
               props.id === 1 && <Link to="/login"><button className="btn btn-danger" type="submit">Login</button></Link>
             }
             {
-              props.id === 2 && <Link to="/account"><img src={avatar != "" && avatar != null ? avatar : "/no_avatar.jpg"} style={{width:64,height:64}} alt="..."></img></Link>
+              props.id === 2 && <Link to="/account"><img src={props.user.avatar != "" && props.user.avatar != null ? "http://localhost:7119/Assets/Avatars/"+props.user.avatar : "/no_avatar.jpg"} style={{width:64,height:64}} alt="..."></img></Link>
             }
           </form>
         </div>
@@ -28,4 +26,4 @@ function Navbar(props) {
   )
 }
 
-export default Navbar;
+export default Navbar

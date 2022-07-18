@@ -1,28 +1,41 @@
 import Navbar from '../navbar/navbar'
-import { useEffect } from "react"
+import { useEffect,useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import DetailSlider from '../detailslide/detailslide'
 import './home.css'
-
-let user = null;
+import localforage from 'localforage'
 
 function Home() {
+
+    const [user, setUser] = useState(null);
     
-    user = useSelector(state=>state.user)
+    //user = useSelector(state=>state.user)
 
     const dispatch = useDispatch()
 
     useEffect(() =>{
-        let userLocal = localStorage.getItem('user')
+
+            localforage.getItem('user', function (err, value) {
+                setUser(value)
+                dispatch({
+                    type: "SET-USER",
+                    payload: value
+                })
+            console.log(value)
+          });
+
+        /*let userLocal = localStorage.getItem('user')
         if(userLocal!=null){
+            console.log(userLocal)
             dispatch({
                 type: "SET-USER",
                 payload: userLocal
             })
+            console.log(userLocal)
         }
         else{
             //you need to login
-        }
+        }*/
     }, [])
 
   return (

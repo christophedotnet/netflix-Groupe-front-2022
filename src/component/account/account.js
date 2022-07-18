@@ -3,7 +3,7 @@ import './account.css'
 import Navbar from '../navbar/navbar'
 import { useEffect,useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import localforage from "localforage";
+import localforage, { getItem } from "localforage";
 import { v4 as uuid } from 'uuid'
 import imageToBase64 from 'image-to-base64/browser'
 import { useNavigate } from 'react-router-dom';
@@ -12,7 +12,7 @@ const axios = require('axios').default
 
 function Account() {
 
-    let user = null;
+    const [user, setUser] = useState(null);
 
     let dispatch = useDispatch()
     let filepath = null;
@@ -25,12 +25,13 @@ function Account() {
     let navigate = useNavigate()
 
     useEffect(() =>{
+
+        //user = localStorage.getItem('user')
+
         localforage.getItem('user', function (err, value) {
             // if err is non-null, we got an error. otherwise, value is the value
-            user = value
-            if(user!=null){
-                console.log(user)
-            }
+            setUser(value)
+            console.log(value)
         });
 
         /*axios.get('https://localhost:7119/user/avatar?id='+user.id+'&avatar='+JSON.stringify(e.target.files[0])
@@ -54,17 +55,16 @@ function Account() {
 
 
     function logout(){
-        localStorage.clear()
-        dispatch({
-            type: "SET-USER",
-            payload: null
-        })
+        localforage.clear()
         navigate("/")
     } 
 
     return (
         <div>
-            <Navbar id={2} user={user} imgData={img}/>
+            {
+                user != null && <Navbar id={2} user={user}/>
+            }
+            
             Account of 
             {
             /*
@@ -79,35 +79,36 @@ function Account() {
                 label={fileName}
                 onChange={(e) => {
                     console.log(e.target.files[0])
-                    console.log(JSON.stringify(e.target.files[0]))
                     const formData = new FormData();
                     formData.append("file", e.target.files[0]);
-                    axios.post("https://localhost:7119/avatar/", formData
-                    ,{
+                    console.log(e.target.files[0])
+                    axios.post("http://localhost:7119/avatar/", formData,{
                     headers : {
                         'Access-Control-Allow-Origin': '*',
-                        'Content-Type': 'application/json',
+                        "Content-Type": "multipart/form-data",
                     }
                     }).then((value)=>{
-                        //console.log(JSON.stringify(value)+" / "+JSON.stringify(e.target.files[0]))
+
+                        if(value.data){
+                            axios.get("http://localhost:7119/user/setavatar?id="+user.id+'&avatar='+e.target.files[0].name
+                            ,{
+                            headers : {
+                                'Access-Control-Allow-Origin': '*',
+                                'Content-Type': 'application/json',
+                            }
+                            }).then((newUser)=>{
+                                if(newUser!=null){
+                                    localforage.setItem('user', newUser.data, function (err) {
+                                        console.log("new user set")
+                                        window.location.reload(false)
+                                        //navigate("/account")
+                                    })
+                                }
+                            })
+                        }
+
                     })
                     
-                    /*axios.get('https://localhost:7119/user/avatar?id='+user.id+'&avatar='+JSON.stringify(e.target.files[0])
-                    ,{
-                    headers : {
-                        'Content-Type': 'application/json',
-                    }
-                    }).then((value)=>{
-                        //console.log(JSON.stringify(value)+" / "+JSON.stringify(e.target.files[0]))
-                    })*/
-                    /*var imageURI = window.URL.createObjectURL(e.target.files[0]);
-                    localforage.setItem("avatar", e.target.files[0]).then(() => {
-                        setImg(imageURI);
-                        dispatch({
-                            type: "SET-USER-AVATAR",
-                            payload: imageURI
-                        })
-                    });*/
                 }}
                 
               />

@@ -22,7 +22,7 @@ function Login() {
 
   function login(e){
     e.preventDefault()
-    axios.get('https://localhost:7119/login?mail='+mail+'&password='+password
+    axios.get('http://localhost:7119/login?mail='+mail+'&password='+password
     ,{
       headers : {
         'Access-Control-Allow-Origin': '*',
@@ -31,20 +31,39 @@ function Login() {
     })
     .then(function (response) {
       if(response.data!=null){
-        localforage.setItem('user', response.data).then(function () {
+
+        console.log(response.data)
+        /*localStorage.setItem('user', JSON.stringify(response.data))
+        dispatch({
+          type: "SET-USER",
+          payload: response.data
+        })*/
+        
+        
+        localforage.setItem('user', response.data, function (err) {
+          dispatch({
+            type: "SET-USER",
+            payload: response.data
+          })
+          navigate("/")
+        })
+          // we got our value
+
+        /*localforage.setItem('user', response.data).then(function () {
           return localforage.getItem('key');
         }).then(function (value) {
           // we got our value
-        navigate("/")
         dispatch({
           type: "SET-USER",
           payload: response.data
         })
+        navigate("/")
         }).catch(function (err) {
           // we got an error
         });
         console.log(response.data)
         //navigate("/")
+        */
       }
     })
     .catch(function (error) {

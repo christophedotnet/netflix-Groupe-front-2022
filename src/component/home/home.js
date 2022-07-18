@@ -1,21 +1,19 @@
 import Navbar from '../navbar/navbar'
 import { useEffect,useState } from "react"
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import DetailSlider from '../detailslide/detailslide'
 import './home.css'
 import localforage from 'localforage'
 
 function Home() {
 
-    const [user, setUser] = useState(null)
-
+    const user = useSelector(state => state.user)
     const dispatch = useDispatch()
 
     useEffect(() =>{
-            localforage.getItem('user', function (err, value) {
-                setUser(value)
-                dispatch({ type: "SET-USER", payload: value })
-          });
+        localforage.getItem('user').then(function(value) {
+            if(value!=null) dispatch({ type: "SET-USER", payload: value })
+        })
     }, [])
 
   return (

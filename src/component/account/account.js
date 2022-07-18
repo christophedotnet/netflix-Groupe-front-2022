@@ -2,7 +2,7 @@
 import './account.css'
 import Navbar from '../navbar/navbar'
 import { useEffect,useState } from "react"
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import localforage from "localforage"
 //import { v4 as uuid } from 'uuid'
 import { useNavigate } from 'react-router-dom'
@@ -10,14 +10,14 @@ const axios = require('axios').default
 
 function Account() {
 
-    const [user, setUser] = useState(null)
+    const user = useSelector(state => state.user)
 
     let navigate = useNavigate()
     let dispatch = useDispatch()
 
     useEffect(() =>{
-        localforage.getItem('user', function (_err, value) {
-            value != null ? setUser(value) : navigate("/")
+        localforage.getItem('user').then(function(value) {
+            value!=null ? dispatch({ type: "SET-USER", payload: value }) : navigate("/")
         })
     }, [])
 

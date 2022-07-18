@@ -20,15 +20,16 @@ function Login() {
     headers : {'Access-Control-Allow-Origin': '*', 'Content-Type': 'application/json' }})
     .then(function (response) {
       if(response.data!=null){
-        
-        localforage.setItem('user', response.data, function (err) {
-          dispatch({
-            type: "SET-USER",
-            payload: response.data
-          })
+        localforage.setItem('user', response.data).then(()=>{
+          dispatch({ type: "SET-USER", payload: response.data })
+          console.log(response.data)
           navigate("/")
         })
-
+        /*localforage.setItem('user', response.data, function (value) {
+          dispatch({ type: "SET-USER", payload: response.data })
+          console.log(response.data)
+          //navigate("/")
+        })*/
       }
     })
   }

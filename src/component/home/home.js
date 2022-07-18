@@ -9,7 +9,7 @@ let user = null;
 function Home() {
     
     user = useSelector(state=>state.user)
-    
+
     const dispatch = useDispatch()
 
     useEffect(() =>{
@@ -19,6 +19,9 @@ function Home() {
                 type: "SET-USER",
                 payload: userLocal
             })
+        }
+        else{
+            //you need to login
         }
     }, [])
 

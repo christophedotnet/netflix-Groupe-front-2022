@@ -31,14 +31,21 @@ function Login() {
     })
     .then(function (response) {
       if(response.data!=null){
-        localStorage.setItem('user',response.data)
+        localforage.setItem('user', response.data).then(function () {
+          return localforage.getItem('key');
+        }).then(function (value) {
+          // we got our value
+        navigate("/")
         dispatch({
           type: "SET-USER",
           payload: response.data
         })
-        navigate("/")
+        }).catch(function (err) {
+          // we got an error
+        });
+        console.log(response.data)
+        //navigate("/")
       }
-      console.log(response);
     })
     .catch(function (error) {
       console.log(error);

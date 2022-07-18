@@ -12,7 +12,8 @@ const axios = require('axios').default
 
 function Account() {
 
-    let user = useSelector(state=>state.user)
+    let user = null;
+
     let dispatch = useDispatch()
     let filepath = null;
     //var base64Img = require('base64-img')
@@ -24,6 +25,25 @@ function Account() {
     let navigate = useNavigate()
 
     useEffect(() =>{
+        localforage.getItem('user', function (err, value) {
+            // if err is non-null, we got an error. otherwise, value is the value
+            user = value
+            if(user!=null){
+                console.log(user)
+            }
+        });
+
+        /*axios.get('https://localhost:7119/user/avatar?id='+user.id+'&avatar='+JSON.stringify(e.target.files[0])
+        ,{
+        headers : {
+            'Access-Control-Allow-Origin': '*',
+            'Content-Type': 'application/json',
+        }
+        }).then((value)=>{
+            console.log(value)
+        })*/
+
+        //user = localforage.getItem('user')
             /*localforage.getItem("avatar").then(val => {
                 dispatch({
                     type: "SET-USER-AVATAR",
@@ -58,14 +78,28 @@ function Account() {
                 id="inputGroupFile01"
                 label={fileName}
                 onChange={(e) => {
-                    
-                    axios.get('https://localhost:7119/user/avatar?id='+user.ID+'&avatar='+e.target.files[0]
+                    console.log(e.target.files[0])
+                    console.log(JSON.stringify(e.target.files[0]))
+                    const formData = new FormData();
+                    formData.append("file", e.target.files[0]);
+                    axios.post("https://localhost:7119/avatar/", formData
                     ,{
                     headers : {
                         'Access-Control-Allow-Origin': '*',
                         'Content-Type': 'application/json',
                     }
+                    }).then((value)=>{
+                        //console.log(JSON.stringify(value)+" / "+JSON.stringify(e.target.files[0]))
                     })
+                    
+                    /*axios.get('https://localhost:7119/user/avatar?id='+user.id+'&avatar='+JSON.stringify(e.target.files[0])
+                    ,{
+                    headers : {
+                        'Content-Type': 'application/json',
+                    }
+                    }).then((value)=>{
+                        //console.log(JSON.stringify(value)+" / "+JSON.stringify(e.target.files[0]))
+                    })*/
                     /*var imageURI = window.URL.createObjectURL(e.target.files[0]);
                     localforage.setItem("avatar", e.target.files[0]).then(() => {
                         setImg(imageURI);

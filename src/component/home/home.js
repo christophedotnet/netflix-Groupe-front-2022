@@ -1,6 +1,5 @@
 import './home.css'
 import Navbar from '../navbar/navbar'
-import { useEffect } from "react"
 import { useSelector } from "react-redux"
 import DetailSlider from '../detailslide/detailslide'
 

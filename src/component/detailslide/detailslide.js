@@ -1,5 +1,4 @@
-import Navbar from '../navbar/navbar';
-import './detailslide.css';
+import './detailslide.css'
 
 function DetailSlider() {
   return (
@@ -19,7 +18,7 @@ function DetailSlider() {
           </div>
       </div>
     </>
-  );
+  )
 }
 
-export default DetailSlider;
+export default DetailSlider

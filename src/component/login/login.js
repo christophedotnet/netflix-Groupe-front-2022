@@ -1,7 +1,7 @@
 import './login.css'
 import Navbar from '../navbar/navbar'
 import { Link, useNavigate } from 'react-router-dom'
-import { useDispatch, useSelector } from "react-redux"
+import { useDispatch } from "react-redux"
 import { useState } from "react"
 const axios = require('axios').default
 
@@ -13,7 +13,7 @@ function Login() {
   let navigate = useNavigate()
   const dispatch = useDispatch()
 
-  async function login(e){
+  function login(e){
     e.preventDefault()
     axios.get('http://localhost:7119/login?mail='+mail+'&password='+password,{headers : {'Access-Control-Allow-Origin': '*', 'Content-Type': 'application/json' }})
     .then(response=>{

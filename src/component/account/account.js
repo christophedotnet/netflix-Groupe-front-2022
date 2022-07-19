@@ -1,7 +1,7 @@
 
 import './account.css'
 import Navbar from '../navbar/navbar'
-import { useEffect } from "react"
+import { React, useEffect } from 'react'
 import { useDispatch, useSelector } from "react-redux"
 import { useNavigate } from 'react-router-dom'
 const axios = require('axios').default
@@ -12,14 +12,14 @@ function Account() {
     let dispatch = useDispatch()
     const user = useSelector((state)=>state.user)
 
-    useEffect(() =>{
-        user == null && navigate("/")
-    }, [])
-
     function logout(){
         dispatch({ type: "SET-USER", payload: null })
         navigate("/")
     } 
+
+    useEffect(()=>{
+        user == null && navigate("/")
+    },[])
 
     return (
         <div>

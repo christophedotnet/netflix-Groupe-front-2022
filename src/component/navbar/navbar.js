@@ -1,8 +1,6 @@
 import './navbar.css'
-import { useEffect,useState } from 'react'
-import {BrowserRouter as Router, Link} from 'react-router-dom'
-import { useSelector, useDispatch } from 'react-redux'
-import localforage from "localforage"
+import { Link } from 'react-router-dom'
+import { useSelector } from 'react-redux'
 
 function Navbar(props) {
 
@@ -22,10 +20,10 @@ function Navbar(props) {
               props.id === 1 && <Link to="/login"><button className="btn btn-danger" type="submit">Login</button></Link>
             }
             {
-              props.id == 2 &&
+              props.id === 2 &&
                 <div>
                   <Link to="/account"> 
-                  <img src={ user != null && user.avatar != null && user.avatar != "" ? "http://localhost:7119/Assets/Avatars/"+user.avatar : "/no_avatar.jpg" } 
+                  <img src={ user !== null && user.avatar !== null && user.avatar !== "" ? "http://localhost:7119/Assets/Avatars/"+user.avatar : "/no_avatar.jpg" } 
                     style={{width:64,height:64,borderRadius: "5px"}} alt="..."></img></Link>
                 </div>
             }

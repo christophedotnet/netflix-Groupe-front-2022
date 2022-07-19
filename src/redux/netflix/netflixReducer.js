@@ -1,6 +1,7 @@
 const INITIAL_STATE = {
     user : null,
-    ressources : []
+    ressources : [],
+    faqs : []
 }
 
 function NetflixReducer (state = INITIAL_STATE, action) {

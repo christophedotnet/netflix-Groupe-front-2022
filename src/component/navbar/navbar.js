@@ -1,15 +1,12 @@
 import './navbar.css'
-import { useEffect } from 'react'
+import { useEffect,useState } from 'react'
 import {BrowserRouter as Router, Link} from 'react-router-dom'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
+import localforage from "localforage"
 
 function Navbar(props) {
 
-  let user = useSelector((state)=>state.user)
-
-  useEffect(() =>{
-    //user = useSelector((state)=>state.user)
-  }, [])
+  const user = useSelector((state)=>state.user)
 
   return(
     <nav className="navbar navbar-expand-lg ">
@@ -25,7 +22,12 @@ function Navbar(props) {
               props.id === 1 && <Link to="/login"><button className="btn btn-danger" type="submit">Login</button></Link>
             }
             {
-              props.id === 2 && <Link to="/account"><img src={user.avatar != "" && user.avatar != null ? "http://localhost:7119/Assets/Avatars/"+user.avatar : "/no_avatar.jpg"} style={{width:64,height:64,borderRadius: "5px"}} alt="..."></img></Link>
+              props.id == 2 &&
+                <div>
+                  <Link to="/account"> 
+                  <img src={ user != null && user.avatar != null && user.avatar != "" ? "http://localhost:7119/Assets/Avatars/"+user.avatar : "/no_avatar.jpg" } 
+                    style={{width:64,height:64,borderRadius: "5px"}} alt="..."></img></Link>
+                </div>
             }
           </form>
         </div>

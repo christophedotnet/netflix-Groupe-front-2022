@@ -2,6 +2,7 @@ import './login.css'
 import Navbar from '../navbar/navbar'
 import { Link, useNavigate } from 'react-router-dom'
 import { useDispatch } from "react-redux"
+import uuid from 'react-uuid'
 import { useState } from "react"
 const axios = require('axios').default
 
@@ -15,9 +16,12 @@ function Login() {
 
   function login(e){
     e.preventDefault()
-    axios.get('http://localhost:7119/login?mail='+mail+'&password='+password,{headers : {'Access-Control-Allow-Origin': '*', 'Content-Type': 'application/json' }})
+    const key = uuid()
+    axios.get('http://localhost:7119/login?mail='+mail+'&password='+password+'&key='+key,{headers : {'Access-Control-Allow-Origin': '*', 'Content-Type': 'application/json' }})
     .then(response=>{
       if(response.data!=null){
+        //localStorage.setItem("keyUser",key)
+        console.log(response.data)
         dispatch({ type: "SET-USER", payload: response.data })
         navigate("/")
       }

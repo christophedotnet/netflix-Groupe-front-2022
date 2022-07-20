@@ -23,7 +23,7 @@ function Navbar(props) {
               props.id === 2 &&
                 <div>
                   <Link to="/account"> 
-                  <img src={ user !== null && user.avatar !== null && user.avatar !== "" ? "http://localhost:7119/Assets/Avatars/"+user.avatar : "/no_avatar.jpg" } 
+                  <img src={ user.avatar !== null && user.avatar !== "" ? "http://localhost:7119/Assets/Avatars/"+user.avatar : "/no_avatar.jpg" } 
                     style={{width:64,height:64,borderRadius: "5px"}} alt="..."></img></Link>
                 </div>
             }

@@ -1,8 +1,9 @@
 import './home.css'
 import Navbar from '../navbar/navbar'
-import { useSelector } from "react-redux"
+import { useEffect, useState } from 'react'
+import { useSelector, useDispatch } from "react-redux"
 import DetailSlider from '../detailslide/detailslide'
-
+const axios = require('axios').default
 
 function Home() {
 

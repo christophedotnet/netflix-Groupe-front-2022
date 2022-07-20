@@ -8,6 +8,17 @@ const axios = require('axios').default
 function Home() {
 
     const user = useSelector((state)=>state.user)
+    const [statutId,setStatutId] = useState(null)
+
+    useEffect(()=>{
+        axios.get('http://localhost:7119/getUserStatut?id='+user.id,{headers : {'Access-Control-Allow-Origin': '*', 'Content-Type': 'application/json' }})
+        .then(response=>{
+            if(response.data!=null){
+                console.log(response.data)
+                setStatutId(response.data.statutId)
+            }
+        })
+    },[])
 
     return (
         <div>
@@ -15,6 +26,9 @@ function Home() {
                 user != null ? 
                 <div>
                     <Navbar id={2}/>
+                    {
+                        statutId
+                    }
                     je suis connecter
                     <DetailSlider/>
                 </div>

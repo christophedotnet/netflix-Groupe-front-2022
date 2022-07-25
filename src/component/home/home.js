@@ -11,13 +11,15 @@ function Home() {
     const [statutId,setStatutId] = useState(null)
 
     useEffect(()=>{
-        axios.get('http://localhost:7119/getUserStatut?id='+user.id,{headers : {'Access-Control-Allow-Origin': '*', 'Content-Type': 'application/json' }})
-        .then(response=>{
-            if(response.data!=null){
-                console.log(response.data)
-                setStatutId(response.data.statutId)
-            }
-        })
+        if(user!=null){
+            axios.get('http://localhost:7119/getUserStatut?id='+user.id,{headers : {'Access-Control-Allow-Origin': '*', 'Content-Type': 'application/json' }})
+            .then(response=>{
+                if(response.data!=null){
+                    console.log(response.data)
+                    setStatutId(response.data.statutId)
+                }
+            })
+        }
     },[])
 
     return (

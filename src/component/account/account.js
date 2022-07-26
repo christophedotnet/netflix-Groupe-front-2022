@@ -31,12 +31,14 @@ function Account() {
                 <Navbar id={2}/>
 
                 <input type="file" accept="image/*" label="Upload image File" onChange={(e) => {
+
                     const formData = new FormData()
                     formData.append("file", e.target.files[0])
-                    axios.post("http://localhost:7119/avatar/", formData,{
-                    headers : {'Access-Control-Allow-Origin': '*',"Content-Type": "multipart/form-data" }
+                    axios.post("http://localhost:7119/api/v1/avatar", formData,{
+                    headers : {'Access-Control-Allow-Origin': '*',"Content-Type": "multipart/form-data" },
                     }).then((value)=>{
-                        if(value.data){
+                        console.log(value)
+                        if(value.status===200){
                             axios.get("http://localhost:7119/user/setavatar?id="+user.id+'&avatar='+e.target.files[0].name,{
                             headers : { 'Access-Control-Allow-Origin': '*', 'Content-Type': 'application/json' }
                             }).then((newUser)=>{

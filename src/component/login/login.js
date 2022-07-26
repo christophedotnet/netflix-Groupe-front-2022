@@ -16,8 +16,20 @@ function Login() {
 
   function login(e){
     e.preventDefault()
-    const key = uuid()
-    axios.get('http://localhost:7119/login?mail='+mail+'&password='+password+'&key='+key,{headers : {'Access-Control-Allow-Origin': '*', 'Content-Type': 'application/json' }})
+    //const key = uuid()
+    axios.get('http://localhost:7119/api/v1/user/token?mail='+mail+"&password="+password,{
+      headers : {'Access-Control-Allow-Origin': '*', 'Content-Type': 'application/json' }})
+      //{data: {userMailPasswordDTO :{mail : mail, password: password}}})
+    .then(response=>{
+      console.log(response)
+      if(response.data!=null){
+        //localStorage.setItem("keyUser",key)
+        //console.log(response.data)
+        dispatch({ type: "SET-USER", payload: response.data.user })
+        navigate("/")
+      }
+    })
+    /*axios.get('http://localhost:7119/login?mail='+mail+'&password='+password+'&key='+key,{headers : {'Access-Control-Allow-Origin': '*', 'Content-Type': 'application/json' }})
     .then(response=>{
       if(response.data!=null){
         //localStorage.setItem("keyUser",key)
@@ -25,7 +37,7 @@ function Login() {
         dispatch({ type: "SET-USER", payload: response.data })
         navigate("/")
       }
-    })
+    })*/
   }
 
   return (

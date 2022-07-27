@@ -25,9 +25,7 @@ function Home() {
                 user != null ? 
                 <div>
                     <Navbar id={2}/>
-                    {
-                        statutId
-                    }
+                    { statutId }
                     je suis connecter
                     <DetailSlider/>
                 </div>

@@ -34,23 +34,18 @@ function Account() {
 
                     const formData = new FormData()
                     formData.append("file", e.target.files[0])
-                    //console.log('Bearer '+localStorage.getItem("token"))
-                    //console.log(user.id);
-                    //console.log(e.target.files[0].name);
-                    axios.post("http://localhost:7119/api/v1/avatar", formData,{
+                    axios.post("http://localhost:7119/api/v1/avatar?id="+user.id+'&avatar='+e.target.files[0].name, formData,{
                     headers : {"Content-Type": "multipart/form-data", 'Authorization': `Bearer ${localStorage.getItem("token")}`},
-                    }).then((value)=>{
-                        console.log(value)
-                        if(value.status===200){
-                            //console.log(localStorage.getItem("token"));
+                    }).then((newUser)=>{
+                        newUser != null && dispatch({ type: "SET-USER", payload: newUser.data })
+                        /*if(value.status===200){
                             axios.patch("http://localhost:7119/api/v1/user/setAvatar?id="+user.id+'&avatar='+e.target.files[0].name,{
                             headers : { 'Content-Type': 'application/json', 'Authorization': `Bearer ${localStorage.getItem("token")}` }
                             }).then((newUser)=>{
-                                console.log(newUser)
                                 //update only the avatar of user
                                 newUser != null && dispatch({ type: "SET-USER", payload: newUser.data })
                             })
-                        }
+                        }*/
                     })
                     
                 }}

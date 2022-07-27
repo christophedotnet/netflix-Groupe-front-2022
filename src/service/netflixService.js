@@ -1,11 +1,15 @@
-import axios from "axios";
+import axios from "axios"
 
-const url = "https://pokeapi.co/api/v2/pokemon?limit=150";
+const url = "http://localhost:7119/api/v1/"
 
-export const getPokemon = (id) => {
-    return axios.get("https://pokeapi.co/api/v2/pokemon/" + id);
+export const getFaqs = () =>{
+    return axios.get(url+'faq')
 }
 
-export const getPokemons = () => {
-    return axios.get(url);
+export const getToken=(mail,password)=>{
+    return axios.get(url+'user/token?mail='+mail+"&password="+password)
+}
+
+export const postAvatar=(id,name,formData,token)=>{
+    return axios.post(url+"avatar?id="+id+'&avatar='+name, formData,{ headers : {"Content-Type": "multipart/form-data", 'Authorization': `Bearer ${token}`}})
 }

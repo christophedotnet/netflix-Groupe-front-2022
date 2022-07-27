@@ -3,6 +3,7 @@ import Navbar from '../navbar/navbar'
 import { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from "react-redux"
 import DetailSlider from '../detailslide/detailslide'
+import { getFaqs } from '../../service/netflixService'
 import Faq from '../faq/faq'
 const axios = require('axios').default
 
@@ -13,8 +14,7 @@ function Home() {
     const [statutId,setStatutId] = useState(null)
 
     useEffect(()=>{
-            axios.get('http://localhost:7119/api/v1/faq')
-            .then(response=>{
+            getFaqs().then(response=>{
                 dispatch({ type: "SET-FAQS", payload: response.data })
             })
     },[])

@@ -4,6 +4,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { useDispatch } from "react-redux"
 import uuid from 'react-uuid'
 import { useState } from "react"
+import { getToken } from '../../service/netflixService'
 const axios = require('axios').default
 
 function Login() {
@@ -16,29 +17,16 @@ function Login() {
 
   function login(e){
     e.preventDefault()
-    //const key = uuid()
-    axios.get('http://localhost:7119/api/v1/user/token?mail='+mail+"&password="+password,{
-      headers : {}})
-      //{data: {userMailPasswordDTO :{mail : mail, password: password}}})
+    getToken(mail,password)
+    //axios.get('http://localhost:7119/api/v1/user/token?mail='+mail+"&password="+password)
     .then(response=>{
-      console.log(response)
+      //console.log(response)
       if(response.data!=null){
-        //localStorage.setItem("keyUser",key)
-        //console.log(response.data)
         localStorage.setItem("token",response.data.token);
         dispatch({ type: "SET-USER", payload: response.data.user })
         navigate("/")
       }
     })
-    /*axios.get('http://localhost:7119/login?mail='+mail+'&password='+password+'&key='+key,{headers : {'Access-Control-Allow-Origin': '*', 'Content-Type': 'application/json' }})
-    .then(response=>{
-      if(response.data!=null){
-        //localStorage.setItem("keyUser",key)
-        console.log(response.data)
-        dispatch({ type: "SET-USER", payload: response.data })
-        navigate("/")
-      }
-    })*/
   }
 
   return (

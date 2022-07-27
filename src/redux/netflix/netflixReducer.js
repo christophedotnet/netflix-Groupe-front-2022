@@ -24,6 +24,12 @@ function NetflixReducer (state = INITIAL_STATE, action) {
                 user: action.payload
             }
         }
+        case 'SET-FAQS': {
+            return{
+                ...state,
+                faqs: action.payload
+            }
+        }
         default: return state
     }
 }

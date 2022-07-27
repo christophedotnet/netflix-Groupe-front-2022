@@ -18,7 +18,7 @@ function Login() {
     e.preventDefault()
     //const key = uuid()
     axios.get('http://localhost:7119/api/v1/user/token?mail='+mail+"&password="+password,{
-      headers : {'Access-Control-Allow-Origin': '*', 'Content-Type': 'application/json' }})
+      headers : {}})
       //{data: {userMailPasswordDTO :{mail : mail, password: password}}})
     .then(response=>{
       console.log(response)

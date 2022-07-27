@@ -3,23 +3,20 @@ import Navbar from '../navbar/navbar'
 import { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from "react-redux"
 import DetailSlider from '../detailslide/detailslide'
+import Faq from '../faq/faq'
 const axios = require('axios').default
 
 function Home() {
 
     const user = useSelector((state)=>state.user)
+    let dispatch = useDispatch()
     const [statutId,setStatutId] = useState(null)
 
     useEffect(()=>{
-        /*if(user!=null){
-            axios.get('http://localhost:7119/getUserStatut?id='+user.id,{headers : {}})
+            axios.get('http://localhost:7119/api/v1/faq')
             .then(response=>{
-                if(response.data!=null){
-                    console.log(response.data)
-                    setStatutId(response.data.statutId)
-                }
+                dispatch({ type: "SET-FAQS", payload: response.data })
             })
-        }*/
     },[])
 
     return (
@@ -37,8 +34,9 @@ function Home() {
                 : <div>
                     <Navbar id={1}/>
                     je suis pas connecter
-                </div>
+                    </div>
             }
+            <Faq/>
         </div>
     )
 }

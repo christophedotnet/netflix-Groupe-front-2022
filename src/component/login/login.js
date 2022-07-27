@@ -25,6 +25,7 @@ function Login() {
       if(response.data!=null){
         //localStorage.setItem("keyUser",key)
         //console.log(response.data)
+        localStorage.setItem("token",response.data.token);
         dispatch({ type: "SET-USER", payload: response.data.user })
         navigate("/")
       }

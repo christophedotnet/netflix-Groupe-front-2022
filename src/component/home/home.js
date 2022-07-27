@@ -11,15 +11,15 @@ function Home() {
     const [statutId,setStatutId] = useState(null)
 
     useEffect(()=>{
-        if(user!=null){
-            axios.get('http://localhost:7119/getUserStatut?id='+user.id,{headers : {'Access-Control-Allow-Origin': '*', 'Content-Type': 'application/json' }})
+        /*if(user!=null){
+            axios.get('http://localhost:7119/getUserStatut?id='+user.id,{headers : {}})
             .then(response=>{
                 if(response.data!=null){
                     console.log(response.data)
                     setStatutId(response.data.statutId)
                 }
             })
-        }
+        }*/
     },[])
 
     return (

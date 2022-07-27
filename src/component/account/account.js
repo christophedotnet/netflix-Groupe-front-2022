@@ -35,13 +35,16 @@ function Account() {
                     const formData = new FormData()
                     formData.append("file", e.target.files[0])
                     axios.post("http://localhost:7119/api/v1/avatar", formData,{
-                    headers : {'Access-Control-Allow-Origin': '*',"Content-Type": "multipart/form-data" },
+                    headers : {"Content-Type": "multipart/form-data" },
                     }).then((value)=>{
                         console.log(value)
                         if(value.status===200){
-                            axios.get("http://localhost:7119/user/setavatar?id="+user.id+'&avatar='+e.target.files[0].name,{
-                            headers : { 'Access-Control-Allow-Origin': '*', 'Content-Type': 'application/json' }
+                            console.log(localStorage.getItem("token"));
+                            axios.patch("http://localhost:7119/api/v1/user/setAvatar?id="+user.id+'&avatar='+e.target.files[0].name,{
+                            headers : { 'Content-Type': 'application/json', 'Authorization': 'Bearer '+localStorage.getItem("token") }
                             }).then((newUser)=>{
+                                console.log(newUser)
+                                //update only the avatar of user
                                 newUser != null && dispatch({ type: "SET-USER", payload: newUser.data })
                             })
                         }
